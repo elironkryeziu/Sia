@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "797041412580",
+    "firebase_url": "https://fiek-e0cba.firebaseio.com",
+    "project_id": "fiek-e0cba",
+    "storage_bucket": "fiek-e0cba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:797041412580:android:3ff403611cdb19a0",
+        "android_client_info": {
+          "package_name": "com.example.fiek"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "797041412580-ubmhbcdct3ajd6atlltqf42brnnncrqp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzc-KdAQaJUqdXvtHKtlAmqtWPZC-G8pA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "797041412580-ubmhbcdct3ajd6atlltqf42brnnncrqp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
