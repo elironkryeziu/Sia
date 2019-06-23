@@ -143,6 +143,7 @@ public class RegisterActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             showMessage("Useri eshte regjistruar me sukses");
                             updateUserInfo(name,pickedImage,mAuth.getCurrentUser());
+                            updateUI();
                         }
                         else{
                             showMessage("Ka ndodhur nje gabim gjate regjistrimit te userit");
@@ -157,7 +158,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void updateUserInfo(final String name, final Uri pickedImage, final FirebaseUser currentUser) {
 
 
-        StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("users_photos");
+        /*StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("users_photos");
         final StorageReference imageFilePath = mStorage.child(pickedImage.getLastPathSegment());
         imageFilePath.putFile(pickedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -168,7 +169,6 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onSuccess(Uri uri) {
 
                         UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
-                                .setDisplayName(name)
                                 .setPhotoUri(uri)
                                 .build();
 
@@ -185,7 +185,19 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
             }
-        });
+        });*/
+        UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
+                .setDisplayName(name).build();
+        currentUser.updateProfile(profileUpdate)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+                            showMessage("Regjistrimi u krye me sukses");
+                            updateUI();
+                        }
+                    }
+                });
 
     }
 

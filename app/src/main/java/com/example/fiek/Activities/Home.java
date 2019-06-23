@@ -1,5 +1,6 @@
 package com.example.fiek.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +18,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.fiek.Fragments.HomeFragment;
+import com.example.fiek.Fragments.ProfileFragment;
+import com.example.fiek.Fragments.SavedFragment;
+import com.example.fiek.Fragments.SettingsFragment;
 import com.example.fiek.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -97,18 +102,32 @@ public class Home extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+            getSupportActionBar().setTitle("Home");
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,new HomeFragment()).commit();
 
-        } else if (id == R.id.nav_tools) {
+        } else if (id == R.id.nav_saved) {
 
-        } else if (id == R.id.nav_share) {
+            getSupportActionBar().setTitle("Te ruajtura");
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,new SavedFragment()).commit();
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_profile) {
+
+            getSupportActionBar().setTitle("Profili");
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,new ProfileFragment()).commit();
+
+        } else if (id == R.id.nav_settings) {
+
+            getSupportActionBar().setTitle("Konfigurimet");
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,new SettingsFragment()).commit();
+
+        } else if(id == R.id.nav_signout){
+
+            FirebaseAuth.getInstance().signOut();
+            Intent loginActivity  = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(loginActivity);
+            finish();
 
         }
 
@@ -126,12 +145,12 @@ public class Home extends AppCompatActivity
         ImageView navUserPhoto = headerView.findViewById(R.id.nav_user_photo);
 
 
-        navUserEmail.setText(currentUser.getEmail());
         navUsername.setText(currentUser.getDisplayName());
+        navUserEmail.setText(currentUser.getEmail());
+
 
         //per me vendos foton e userit ne Nav e perdorim librarine Glide
-        Glide.with(this).load(currentUser.getPhotoUrl()).into(navUserPhoto);
-
+        //Glide.with(this).load(currentUser.getPhotoUrl()).into(navUserPhoto);
 
 
 
