@@ -1,9 +1,14 @@
 package com.example.fiek.Activities;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.view.Gravity;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,17 +19,27 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.fiek.Fragments.HomeFragment;
 import com.example.fiek.Fragments.ProfileFragment;
 import com.example.fiek.Fragments.SavedFragment;
 import com.example.fiek.Fragments.SettingsFragment;
+import com.example.fiek.Models.Post;
 import com.example.fiek.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,6 +47,10 @@ public class Home extends AppCompatActivity
 
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
+    Dialog popAddPost;
+    Button btnAdd;
+    TextView popupTitle,popupContent;
+    ProgressBar popupProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,18 +59,20 @@ public class Home extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-        //ini
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+
+        //metoda qe i inicializon elementet e popup formes per me shtu ni pytje
+        iniPopup();
+
+
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                popAddPost.show();
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -63,6 +84,68 @@ public class Home extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         updateNavHeader();
+    }
+
+    private void iniPopup() {
+        popAddPost = new Dialog(this);
+        popAddPost.setContentView(R.layout.popup_add_post);
+        popAddPost.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        popAddPost.getWindow().setLayout(Toolbar.LayoutParams.MATCH_PARENT,Toolbar.LayoutParams.WRAP_CONTENT);
+        popAddPost.getWindow().getAttributes().gravity = Gravity.TOP;
+
+        btnAdd = popAddPost.findViewById(R.id.btnAdd);
+        popupTitle = popAddPost.findViewById(R.id.popupTitle);
+        popupContent = popAddPost.findViewById(R.id.popupContent);
+        popupProgressBar = popAddPost.findViewById(R.id.popProgressBar);
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnAdd.setVisibility(View.INVISIBLE);
+                popupProgressBar.setVisibility(View.VISIBLE);
+
+                if (popupTitle.getText().toString().equals("")){
+                    btnAdd.setVisibility(View.VISIBLE);
+                    popupProgressBar.setVisibility(View.INVISIBLE);
+                    showMessage("Ju lutem shkruajeni pytjen tuaj");
+                }
+                else {
+                    //e ruajme pytjen ne firebase databaze
+                    Post post = new Post(popupTitle.getText().toString(),popupContent.getText().toString(),currentUser.getUid());
+
+                    addPost(post);
+
+
+                }
+
+
+            }
+        });
+
+    }
+
+    private void addPost(Post post) {
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Posts").push();
+
+        String key = myRef.getKey();
+        post.setPostKey(key);
+
+        myRef.setValue(post).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                showMessage("Pyetja juaj u dergua me sukses");
+                btnAdd.setVisibility(View.VISIBLE);
+                popupProgressBar.setVisibility(View.INVISIBLE);
+                popAddPost.dismiss();
+            }
+        });
+
+    }
+
+    private void showMessage(String message) {
+        Toast.makeText(Home.this,message,Toast.LENGTH_LONG).show();
     }
 
     @Override

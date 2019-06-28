@@ -135,6 +135,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void createUserAccount(String email, final String name, String password) {
+
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
