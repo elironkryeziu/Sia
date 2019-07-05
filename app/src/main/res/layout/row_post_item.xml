@@ -4,19 +4,77 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="145dp"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="367dp"
+        android:layout_height="104dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/card_shape_style" />
+
+    <TextView
+        android:id="@+id/row_post_title"
+        android:layout_width="322dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/cardpost_style"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="8dp"
+        android:text="Titulli"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/tvUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/row_post_title" />
+
+    <ImageView
+        android:id="@+id/btnLike"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/tvUser"
+        app:srcCompat="@drawable/thumb_up_black_18dp" />
+
+    <ImageView
+        android:id="@+id/btnAnswer"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/btnLike"
+        app:layout_constraintTop_toBottomOf="@+id/tvUser"
+        app:srcCompat="@drawable/baseline_comment_black_18dp" />
+
+    <ImageView
+        android:id="@+id/btnSave"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:srcCompat="@drawable/save" />
+
+
 </android.support.constraint.ConstraintLayout>

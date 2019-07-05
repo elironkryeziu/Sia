@@ -7,12 +7,14 @@ public class Post {
     private String title;
     private String description;
     private String userId;
+    private String userName;
     private Object timeStamp;
 
-    public Post(String title, String description, String userId){
+    public Post(String title, String description, String userId, String userName){
         this.title=title;
         this.description=description;
         this.userId=userId;
+        this.userName=userName;
         this.timeStamp= ServerValue.TIMESTAMP;
     }
 
@@ -57,5 +59,13 @@ public class Post {
 
     public void setTimeStamp(Object timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

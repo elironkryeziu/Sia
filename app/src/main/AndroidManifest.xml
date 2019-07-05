@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.fiek">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -12,11 +13,14 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Activities.PostDetailActivity"></activity>
         <activity
             android:name=".Activities.Home"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".Activities.RegisterActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activities.RegisterActivity"
+            android:parentActivityName=".Activities.LoginActivity" />
         <activity android:name=".Activities.HomeActivity" />
         <activity android:name=".Activities.LoginActivity">
             <intent-filter>
@@ -25,6 +29,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_application_id"
+            tools:replace="android:value" />
+        <meta-data
+            android:name="com.facebook.sdk.AutoLogAppEventsEnabled"
+            android:value="false" />
     </application>
 
 </manifest>

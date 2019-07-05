@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffff"
+    tools:context=".Activities.PostDetailActivity">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="0dp"
+            android:layout_height="272dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/card_shape_style" />
+
+        <TextView
+            android:id="@+id/txtPostTitle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:text="Pershendetje, une jam nje pyetje?"
+            android:textColor="#000000"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+        <TextView
+            android:id="@+id/txtPostDateName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="29 Qershor 2019 "
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtPostTitle" />
+
+        <TextView
+            android:id="@+id/txtPostDesc"
+            android:layout_width="363dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Ktu supozohet me u shfaq description i pyetjes, pra kur useri e elaboron pytjen e tij na shfaqet ketu lorem ipsum bla lba"
+            android:textColor="#373737"
+            app:layout_constraintStart_toStartOf="@+id/imageView3"
+            app:layout_constraintTop_toBottomOf="@+id/txtPostDateName" />
+
+        <EditText
+            android:id="@+id/post_comment"
+            android:layout_width="257dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/edittext_button_style_rounded"
+            android:ems="10"
+            android:hint="Shkruaj pergjigje"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/add_comment_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/edittext_button_style_rounded"
+            android:text="Shto"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/post_comment" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginBottom="12dp"
+            android:background="#2e2e2e"
+            app:layout_constraintBottom_toTopOf="@+id/post_comment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/txtUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:text="| Postuar nga: "
+            android:textStyle="italic"
+            app:layout_constraintStart_toEndOf="@+id/txtPostDateName"
+            app:layout_constraintTop_toBottomOf="@+id/txtPostTitle" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_comment"
+            android:layout_width="402dp"
+            android:layout_height="321dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+        <ImageView
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="@+id/imageView3"
+            app:srcCompat="@drawable/ic_delete_black_24dp"
+            android:contentDescription="TODO" />
+
+        <ImageView
+            android:id="@+id/btnLike"
+            android:layout_width="90dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/view1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/thumb_up_black_18dp" />
+
+        <TextView
+            android:id="@+id/txtNrLikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="12dp"
+            android:text="10"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/view1"
+            app:layout_constraintStart_toEndOf="@+id/btnLike" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v4.widget.NestedScrollView>

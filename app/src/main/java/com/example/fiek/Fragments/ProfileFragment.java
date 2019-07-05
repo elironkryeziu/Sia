@@ -7,8 +7,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.fiek.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +34,14 @@ public class ProfileFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private String profile_name;
+
+
+    FirebaseAuth mAuth;
+    FirebaseUser currentUser;
+    ImageView user_photo;
+    TextView txtEmri,txtEmail,txtVerifikuar;
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,8 +79,27 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        View fragmentView = inflater.inflate(R.layout.fragment_profile, container, false);
+        user_photo = fragmentView.findViewById(R.id.user_photo);
+        txtEmri = fragmentView.findViewById(R.id.txtEmri_Profile);
+        txtEmail = fragmentView.findViewById(R.id.txtEmail_Profile);
+        txtVerifikuar = fragmentView.findViewById(R.id.txtVerifikuar);
+        txtVerifikuar.setVisibility(View.INVISIBLE);
+        if(!currentUser.isEmailVerified()) {
+            txtVerifikuar.setVisibility(View.VISIBLE);
+            txtVerifikuar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    currentUser.sendEmailVerification();
+                }
+            });
+        }
+        txtEmail.setText(currentUser.getEmail());
+        txtEmri.setText(currentUser.getDisplayName());
+        Glide.with(this).load(currentUser.getPhotoUrl()).into(user_photo);
+        return fragmentView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

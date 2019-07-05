@@ -1,6 +1,7 @@
 package com.example.fiek.Activities;
 
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,6 +45,8 @@ public class LoginActivity extends AppCompatActivity {
         HomeActivity = new Intent(this, com.example.fiek.Activities.Home.class);
         RegisterActivity = new Intent(this,com.example.fiek.Activities.RegisterActivity.class);
 
+
+
         loginProgress.setVisibility(View.INVISIBLE);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void signIn(String email, String password) {
 
+
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -94,6 +98,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(HomeActivity);
         finish();
     }
+
 
     private void showMessage(String meesage) {
         Toast.makeText(getApplicationContext(),meesage,Toast.LENGTH_LONG).show();

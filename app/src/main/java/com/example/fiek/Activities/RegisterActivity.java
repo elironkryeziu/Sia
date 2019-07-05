@@ -143,7 +143,9 @@ public class RegisterActivity extends AppCompatActivity {
 
                         if(task.isSuccessful()){
                             showMessage("Useri eshte regjistruar me sukses");
+
                             updateUserInfo(name,pickedImage,mAuth.getCurrentUser());
+                            mAuth.getCurrentUser().sendEmailVerification();
                             updateUI();
                         }
                         else{
@@ -157,9 +159,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void updateUserInfo(final String name, final Uri pickedImage, final FirebaseUser currentUser) {
-
-
-        /*StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("users_photos");
+        UserProfileChangeRequest profileUpdate1 = new UserProfileChangeRequest.Builder()
+                .setDisplayName(name).build();
+        currentUser.updateProfile(profileUpdate1);
+        StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("users_photos");
         final StorageReference imageFilePath = mStorage.child(pickedImage.getLastPathSegment());
         imageFilePath.putFile(pickedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -172,7 +175,6 @@ public class RegisterActivity extends AppCompatActivity {
                         UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
                                 .setPhotoUri(uri)
                                 .build();
-
                         currentUser.updateProfile(profileUpdate)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -186,7 +188,8 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
             }
-        });*/
+        });
+        /*
         UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
                 .setDisplayName(name).build();
         currentUser.updateProfile(profileUpdate)
@@ -198,7 +201,7 @@ public class RegisterActivity extends AppCompatActivity {
                             updateUI();
                         }
                     }
-                });
+                });*/
 
     }
 

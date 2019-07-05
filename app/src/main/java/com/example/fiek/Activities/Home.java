@@ -4,10 +4,8 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.Gravity;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
@@ -22,7 +20,6 @@ import android.view.Menu;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +36,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -84,6 +80,9 @@ public class Home extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         updateNavHeader();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,new HomeFragment()).commit();
+
     }
 
     private void iniPopup() {
@@ -111,14 +110,10 @@ public class Home extends AppCompatActivity
                 }
                 else {
                     //e ruajme pytjen ne firebase databaze
-                    Post post = new Post(popupTitle.getText().toString(),popupContent.getText().toString(),currentUser.getUid());
-
+                    Post post = new Post(popupTitle.getText().toString(),popupContent.getText().toString(),currentUser.getUid(),currentUser.getDisplayName());
+                    popupTitle.setText("");popupContent.setText("");
                     addPost(post);
-
-
                 }
-
-
             }
         });
 
@@ -233,7 +228,7 @@ public class Home extends AppCompatActivity
 
 
         //per me vendos foton e userit ne Nav e perdorim librarine Glide
-        //Glide.with(this).load(currentUser.getPhotoUrl()).into(navUserPhoto);
+        Glide.with(this).load(currentUser.getPhotoUrl()).into(navUserPhoto);
 
 
 
