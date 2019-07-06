@@ -2,7 +2,9 @@ package com.example.fiek.Activities;
 
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fiek.R;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,6 +28,15 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
+    Handler handler = new Handler();
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            clLogin.setVisibility(View.VISIBLE);
+            clDetails.setVisibility(View.VISIBLE);
+        }
+    };
+
     private EditText userEmail, userPassword;
     private Button btnLogin;
     private ProgressBar loginProgress;
@@ -28,7 +44,8 @@ public class LoginActivity extends AppCompatActivity {
     private Intent HomeActivity;
     private Intent RegisterActivity;
     private TextView txtRegister;
-
+    private ConstraintLayout clDetails;
+    private ConstraintLayout clLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +58,17 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         loginProgress = findViewById(R.id.loadingProgress);
         txtRegister = findViewById(R.id.txtRegister);
+        clDetails = findViewById(R.id.clDetails);
+        clLogin = findViewById(R.id.clLogin);
         mAuth = FirebaseAuth.getInstance();
         HomeActivity = new Intent(this, com.example.fiek.Activities.Home.class);
         RegisterActivity = new Intent(this,com.example.fiek.Activities.RegisterActivity.class);
 
-
-
+        handler.postDelayed(runnable,1500);
         loginProgress.setVisibility(View.INVISIBLE);
+
+
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,4 +133,6 @@ public class LoginActivity extends AppCompatActivity {
             updateUI();
         }
     }
+
+
 }

@@ -143,7 +143,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                         if(task.isSuccessful()){
                             showMessage("Useri eshte regjistruar me sukses");
-
                             updateUserInfo(name,pickedImage,mAuth.getCurrentUser());
                             mAuth.getCurrentUser().sendEmailVerification();
                             updateUI();
