@@ -92,7 +92,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(RegisterActivity);
-                finish();
             }
         });
     }
@@ -135,4 +134,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    public void Endrit(View view) {
+        Toast.makeText(getApplicationContext(), "Klikom", Toast.LENGTH_SHORT).show();
+    }
 }

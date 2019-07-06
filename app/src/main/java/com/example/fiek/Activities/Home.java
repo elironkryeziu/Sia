@@ -168,7 +168,10 @@ public class Home extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about_us) {
+            getSupportActionBar().setTitle("Rreth nesh");
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,new SettingsFragment()).commit();
+
             return true;
         }
 
@@ -194,11 +197,6 @@ public class Home extends AppCompatActivity
 
             getSupportActionBar().setTitle("Profili");
             getSupportFragmentManager().beginTransaction().replace(R.id.container,new ProfileFragment()).commit();
-
-        } else if (id == R.id.nav_settings) {
-
-            getSupportActionBar().setTitle("Konfigurimet");
-            getSupportFragmentManager().beginTransaction().replace(R.id.container,new SettingsFragment()).commit();
 
         } else if(id == R.id.nav_signout){
 

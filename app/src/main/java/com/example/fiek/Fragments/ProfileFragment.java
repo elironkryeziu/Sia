@@ -87,6 +87,14 @@ public class ProfileFragment extends Fragment {
         txtEmail = fragmentView.findViewById(R.id.txtEmail_Profile);
         txtVerifikuar = fragmentView.findViewById(R.id.txtVerifikuar);
         txtVerifikuar.setVisibility(View.INVISIBLE);
+        checkForVisibility();
+        txtEmail.setText(currentUser.getEmail());
+        txtEmri.setText(currentUser.getDisplayName());
+        Glide.with(this).load(currentUser.getPhotoUrl()).into(user_photo);
+        return fragmentView;
+    }
+
+    private void checkForVisibility() {
         if(!currentUser.isEmailVerified()) {
             txtVerifikuar.setVisibility(View.VISIBLE);
             txtVerifikuar.setOnClickListener(new View.OnClickListener() {
@@ -95,11 +103,9 @@ public class ProfileFragment extends Fragment {
                     currentUser.sendEmailVerification();
                 }
             });
+        }else {
+            txtVerifikuar.setVisibility(View.INVISIBLE);
         }
-        txtEmail.setText(currentUser.getEmail());
-        txtEmri.setText(currentUser.getDisplayName());
-        Glide.with(this).load(currentUser.getPhotoUrl()).into(user_photo);
-        return fragmentView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -108,6 +114,8 @@ public class ProfileFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
+
 
     @Override
     public void onAttach(Context context) {

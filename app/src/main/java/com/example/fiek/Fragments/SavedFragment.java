@@ -110,7 +110,6 @@ public class SavedFragment extends Fragment {
                 savedPosts = new ArrayList<>();
                 for (DataSnapshot savedPost: dataSnapshot.child(mAuth.getCurrentUser().getUid()).getChildren()){
                     savedPosts.add(savedPost.getKey());
-                    System.out.println(savedPost.getKey());
                 }
             }
 
